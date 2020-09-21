@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
@@ -11,10 +10,9 @@ async function fetchJobs(updateCb) {
   const json = await res.json();
 
   updateCb(json);
-};
+}
 
 function App() {
-
   const [jobList, updateJobs] = useState([]);
 
   useEffect(() => {
@@ -22,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       <Jobs jobs={jobList} />
     </div>
   );
