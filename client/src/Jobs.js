@@ -24,14 +24,23 @@ function Jobs({ jobs }) {
   const numPages = Math.ceil(numJobs / 50);
   const [activeStep, setActiveStep] = useState(0);
   const jobsOnPage = jobs.slice(activeStep * 50, activeStep * 50 + 50);
+
+  function scrollToTop() {
+    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    if (c > 0) {
+      window.requestAnimationFrame(scrollToTop);
+      window.scrollTo(0, c - c / 8);
+    }
+  }
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    scrollToTop();
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    scrollToTop();
   };
 
-  console.log('job is', jobs[0]);
   return (
     <div className="jobs">
       <JobModal open={open} job={selectedJob} handleClose={handleClose} />
